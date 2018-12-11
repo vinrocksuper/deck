@@ -5,16 +5,25 @@ public class Deck {
     private ArrayList<Card> Dealt;
     public Deck(String[] ranks, String[] suit, int[] val)
     {
+        unDealt = new ArrayList<>();
+        Dealt = new ArrayList<>();
         for(int i=0;i< ranks.length;i++)
         {
             for(int j=0;j< suit.length;j++)
             {
-                for(int k=0;k<val.length;k++)
-                {
-                    unDealt.add(new Card(ranks[i],suit[j],val[k]));
-                }
+
+                    unDealt.add(new Card(ranks[i],suit[j],val[i]));
+
             }
         }
+    }
+    public ArrayList<Card> getUnDealt()
+    {
+        return unDealt;
+    }
+    public ArrayList<Card> getDealt()
+    {
+        return Dealt;
     }
     public boolean isEmpty()
     {
@@ -41,11 +50,11 @@ public class Deck {
     }
     public void shuffle(){
         unDealt.addAll(Dealt);
-        for(int i=0;i<Dealt.size();i++)
+        while(Dealt.size()>0)
         {
-            Dealt.remove(i);
+            Dealt.remove(0);
         }
-        for(int i=51;i>=1;i--)
+        for(int i=unDealt.size()-1;i>0;i--)
         {
             int pos = (int) (Math.random() * i);
             Card temp = unDealt.get(i);
